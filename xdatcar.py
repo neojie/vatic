@@ -1,11 +1,11 @@
 #!/usr/bin/env python
-# This script was created by zqj
+# copy shamelessly from zqj
 # <Tue May 26 09:05:25 CST 2015>
 
-##################################### NOTES ##################################### 
+##################################### NOTES #####################################
 # 1. Set NBLOCK = 1 in the INCAR, so that all the configuration is wrtten to
 # XDATCAR.
-################################################################################# 
+#################################################################################
 
 import os
 import numpy as np
@@ -19,7 +19,7 @@ ev = 1.60217733E-19
 # Avogadro's Constant
 Navogadro = 6.0221412927E23
 
-################################################################################      
+################################################################################
 class xdatcar:
     """ Python Class for VASP XDATCAR """
 
@@ -59,7 +59,7 @@ class xdatcar:
         self.Time = np.arange(self.Niter-1) * self.potim
         self.getTemp()
 
-        # Velocity Autocorrelation Function 
+        # Velocity Autocorrelation Function
         self.VAF = None
         self.VAF2= None
         # Pair Correlation Function
@@ -85,7 +85,7 @@ class xdatcar:
 
         inp = [line for line in open(self.xdatcar) if line.strip()]
         scale = float(inp[1])
-        
+
         self.cell = np.array([line.split() for line in inp[2:5]],
                               dtype=float)
         self.cell *= scale
@@ -133,7 +133,7 @@ class xdatcar:
             # print "Reading POTIM & POMASS from OUTCAR..."
 
             outcar = [line.strip() for line in open('OUTCAR')]
-            lp = 0; lm = 0; 
+            lp = 0; lm = 0;
             for ll, line in enumerate(outcar):
                 if 'POTIM' in line:
                     lp = ll
@@ -180,7 +180,7 @@ class xdatcar:
         for i in range(self.Nions):
             for j in range(3):
                 self.VAF2 += np.correlate(self.velocity[:,i,j],
-                                          self.velocity[:,i,j], 
+                                          self.velocity[:,i,j],
                                           'full')
         # two-sided VAF
         self.VAF2 /=  np.sum(self.velocity**2)
@@ -245,7 +245,7 @@ class xdatcar:
 
         return val, b[1:]
 
-################################################################################      
+################################################################################
 
 # test code of the above class
 if __name__ == '__main__':
@@ -255,7 +255,7 @@ if __name__ == '__main__':
     # print inp.VAF.shape
     # plt.plot(inp.Time, inp.VAF, 'ko-', lw=1.0, ms=2,
     #         markeredgecolor='r', markerfacecolor='red')
-    # 
+    #
     # plt.xlabel('Time [fs]')
     # plt.ylabel('Velocity Autocorrelation Function')
 
