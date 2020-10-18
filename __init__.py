@@ -13,7 +13,7 @@ PythEOS
 # this make vatic.XDATCAR_toolkit direclty usable, but other .py file in others not usable
 from .others import XDATCAR_toolkit
 from .trajectory import trajxdt_v3
-from .tcdac import tcdac_v2
+#from .tcdac import tcdac_v2
 
 #### import others folder 
 from . import others
